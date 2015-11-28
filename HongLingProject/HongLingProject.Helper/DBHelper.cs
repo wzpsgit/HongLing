@@ -7,7 +7,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace HongLingProject
+namespace HongLingProject.Helper
 {
     public class DBhelper
     {
