@@ -9,15 +9,10 @@ using System.Data.SqlClient;
 
 namespace HongLingProject.Helper
 {
-    public class DBhelper
+    public static class DBhelper
     {
         //连接字符串  
         private static readonly string ConnectionString = ConfigurationManager.AppSettings["SqlConnection"];
-        public DBhelper()
-        {
-
-        }
-
 
         /// <summary>
         /// 执行SQL查询语句返回DataTable

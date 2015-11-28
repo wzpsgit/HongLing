@@ -95,6 +95,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HongLingProject.BLL\HongLingProject.BLL.csproj">
+      <Project>{bd3078d0-854a-49fd-aedc-729803ed1996}</Project>
+      <Name>HongLingProject.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HongLingProject.Helper\HongLingProject.Helper.csproj">
+      <Project>{dddac91a-5a74-4645-aa1b-d5b859ff0246}</Project>
+      <Name>HongLingProject.Helper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

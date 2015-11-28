@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HongLingProject.BLL;
 
 namespace HongLingProject
 {
@@ -23,40 +24,20 @@ namespace HongLingProject
         public MainWindow()
         {
             InitializeComponent();
-            MarkBind();
+            DealData dealData = new DealData();
+            MarkBind(dealData);
         }
 
         /// <summary>
         /// 标类型
         /// </summary>
-        public void MarkBind()
+        public void MarkBind(DealData dealData)
         {
-            List<ComboBox> MarkList = new List<ComboBox>();
-            MarkList.Add(new ComboBox() { Value = 1, DisplayName = "信用标" });
-            MarkList.Add(new ComboBox() { Value = 2, DisplayName = "净值标" });
-            MarkList.Add(new ComboBox() { Value = 3, DisplayName = "快借标" });
-            MarkList.Add(new ComboBox() { Value = 4, DisplayName = "推荐标" });
-            MarkList.Add(new ComboBox() { Value = 5, DisplayName = "资产标" });
-            MarkList.Add(new ComboBox() { Value = 6, DisplayName = "秒还标" });
-            MarkList.Add(new ComboBox() { Value = 7, DisplayName = "公信贷" });
-            MarkList.Add(new ComboBox() { Value = 8, DisplayName = "特定标" });
-            MarkList.Add(new ComboBox() { Value = 9, DisplayName = "议标" });
-            Mark_ComboBox.ItemsSource = MarkList;
+            var lsComb= dealData.DealMarkType();
+            Mark_ComboBox.ItemsSource = lsComb;
             Mark_ComboBox.DisplayMemberPath = "DisplayName";
-            Mark_ComboBox.SelectedValuePath = "Value";
-            Mark_ComboBox.SelectedValue = 2;
+            Mark_ComboBox.SelectedValuePath = "ID";
+            Mark_ComboBox.SelectedValue = lsComb.Where(p => p.IsDefault).Select(p => p.ID).First();
         }
-    }
-
-    public class ComboBox
-    {
-        /// <summary>
-        /// 显示名称
-        /// </summary>
-        public string DisplayName { get; set; }
-        /// <summary>
-        /// 值
-        /// </summary>
-        public int Value { get; set; }
     }
 }
