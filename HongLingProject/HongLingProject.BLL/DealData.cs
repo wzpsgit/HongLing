@@ -16,15 +16,27 @@ namespace HongLingProject.BLL
         /// 处理标的类型
         /// </summary>
         /// <returns></returns>
-        public List<ComboBox> DealMarkType()
+        public List<ComboBoxModel> DealMarkType()
         {
-            var lsComb = new List<ComboBox>();
-            DataTable dt = queryData.GetMarkType();
-            foreach(DataRow dr in dt.Rows)
-            {
-                lsComb.Add(new ComboBox() { ID = int.Parse(dr["ID"].ToString()), DisplayName = dr["DisplayName"].ToString(),IsDefault=dr["IsDefault"].ToString()=="True"?true:false });
-            }
+            return DealDataTable(queryData.QueryMarkType());
+        }
 
+        /// <summary>
+        /// 还款方式
+        /// </summary>
+        /// <returns></returns>
+        public List<ComboBoxModel> DealPaymentMethod()
+        {
+            return DealDataTable(queryData.QueryPaymentMethod());
+        }
+
+        private List<ComboBoxModel> DealDataTable(DataTable dt)
+        {
+            var lsComb = new List<ComboBoxModel>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                lsComb.Add(new ComboBoxModel() { ID = int.Parse(dr["ID"].ToString()), DisplayName = dr["DisplayName"].ToString(), IsDefault = dr["IsDefault"].ToString() == "True" ? true : false });
+            }
             return lsComb;
         }
     }

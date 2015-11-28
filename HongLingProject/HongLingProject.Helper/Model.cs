@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HongLingProject.Helper
 {
-    public class ComboBox
+    public class ComboBoxModel
     {
         /// <summary>
         /// ID

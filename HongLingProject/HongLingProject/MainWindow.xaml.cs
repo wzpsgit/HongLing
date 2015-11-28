@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HongLingProject.BLL;
+using HongLingProject.Helper;
 
 namespace HongLingProject
 {
@@ -26,6 +27,7 @@ namespace HongLingProject
             InitializeComponent();
             DealData dealData = new DealData();
             MarkBind(dealData);
+            PaymentMethodBind(dealData);
         }
 
         /// <summary>
@@ -34,10 +36,25 @@ namespace HongLingProject
         public void MarkBind(DealData dealData)
         {
             var lsComb= dealData.DealMarkType();
-            Mark_ComboBox.ItemsSource = lsComb;
-            Mark_ComboBox.DisplayMemberPath = "DisplayName";
-            Mark_ComboBox.SelectedValuePath = "ID";
-            Mark_ComboBox.SelectedValue = lsComb.Where(p => p.IsDefault).Select(p => p.ID).First();
+            Bind(Mark_ComboBox, lsComb);
+        }
+
+        /// <summary>
+        /// 还款方式
+        /// </summary>
+        /// <param name="dealData"></param>
+        public void PaymentMethodBind(DealData dealData)
+        {
+            var lsComb = dealData.DealPaymentMethod();
+            Bind(Repayment_ComboBox, lsComb);
+        }
+
+        public void Bind(ComboBox combBox,List<ComboBoxModel> lsComb)
+        {
+            combBox.ItemsSource = lsComb;
+            combBox.DisplayMemberPath = "DisplayName";
+            combBox.SelectedValuePath = "ID";
+            combBox.SelectedValue = lsComb.Where(p => p.IsDefault).Select(p => p.ID).First();
         }
     }
 }
