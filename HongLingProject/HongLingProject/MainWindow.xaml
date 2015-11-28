@@ -11,7 +11,7 @@
         <TextBox x:Name="InterestRate_Text" HorizontalAlignment="Left"  BorderThickness="0,0,0,1" Height="23" Margin="70,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="60"/>
         <Label Content="%" HorizontalAlignment="Left" Margin="125,25,0,0" VerticalAlignment="Top"/>
         <Label Content="标类型：" HorizontalAlignment="Left" Margin="155,25,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="Mark_ComboBox" HorizontalAlignment="Left" Margin="215,25,0,0" VerticalAlignment="Top" Width="60"/>
+        <ComboBox x:Name="Mark_ComboBox" HorizontalAlignment="Left" Margin="215,25,0,0" VerticalAlignment="Top" Width="70"/>
         <Label Content="还款方式：" HorizontalAlignment="Left" Margin="305,25,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="Repayment_ComboBox" HorizontalAlignment="Left" Margin="375,25,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="借款时间：" HorizontalAlignment="Left" Margin="515,25,0,0" VerticalAlignment="Top" Width="70"/>
