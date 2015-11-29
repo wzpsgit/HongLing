@@ -28,6 +28,7 @@ namespace HongLingProject
             DealData dealData = new DealData();
             MarkBind(dealData);
             PaymentMethodBind(dealData);
+            TimeBind();
         }
 
         /// <summary>
@@ -47,6 +48,15 @@ namespace HongLingProject
         {
             var lsComb = dealData.DealPaymentMethod();
             Bind(Repayment_ComboBox, lsComb);
+        }
+
+        public void TimeBind()
+        {
+            string time = DateTime.Now.ToString("H-m-s");
+            string[] strTime = time.Split('-');
+            Hour_Text.Text = strTime[0];
+            Minute_Text.Text = strTime[1];
+            Second_Text.Text = strTime[2];
         }
 
         public void Bind(ComboBox combBox,List<ComboBoxModel> lsComb)
