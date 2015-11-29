@@ -12,6 +12,8 @@ namespace HongLingProject.BLL
     public class DealData
     {
         QueryData queryData = new QueryData();
+        InsertData insertData = new InsertData();
+
         /// <summary>
         /// 处理标的类型
         /// </summary>
@@ -28,6 +30,11 @@ namespace HongLingProject.BLL
         public List<ComboBoxModel> DealPaymentMethod()
         {
             return DealDataTable(queryData.QueryPaymentMethod());
+        }
+
+        public bool InsertAutoBid(int No)
+        {
+            return insertData.InsertAutoBid(No) > 0 ? true : false;
         }
 
         private List<ComboBoxModel> DealDataTable(DataTable dt)

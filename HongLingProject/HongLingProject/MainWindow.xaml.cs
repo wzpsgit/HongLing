@@ -22,19 +22,19 @@ namespace HongLingProject
     /// </summary>
     public partial class MainWindow : Window
     {
+        DealData dealData = new DealData();
         public MainWindow()
         {
             InitializeComponent();
-            DealData dealData = new DealData();
-            MarkBind(dealData);
-            PaymentMethodBind(dealData);
+            MarkBind();
+            PaymentMethodBind();
             TimeBind();
         }
 
         /// <summary>
         /// 标类型
         /// </summary>
-        public void MarkBind(DealData dealData)
+        public void MarkBind()
         {
             var lsComb= dealData.DealMarkType();
             Bind(Mark_ComboBox, lsComb);
@@ -44,7 +44,7 @@ namespace HongLingProject
         /// 还款方式
         /// </summary>
         /// <param name="dealData"></param>
-        public void PaymentMethodBind(DealData dealData)
+        public void PaymentMethodBind()
         {
             var lsComb = dealData.DealPaymentMethod();
             Bind(Repayment_ComboBox, lsComb);
@@ -65,6 +65,12 @@ namespace HongLingProject
             combBox.DisplayMemberPath = "DisplayName";
             combBox.SelectedValuePath = "ID";
             combBox.SelectedValue = lsComb.Where(p => p.IsDefault).Select(p => p.ID).First();
+        }
+
+        private void Insert_Button_Click(object sender, RoutedEventArgs e)
+        {
+            int AutoBidNo = int.Parse(AutomaticBid_Text.Text);
+            dealData.InsertAutoBid(AutoBidNo);
         }
     }
 }

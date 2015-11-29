@@ -7,21 +7,25 @@
         mc:Ignorable="d"
         Title="红岭创投" Height="600" Width="1000">
     <Grid>
-        <Label Content="利率：" HorizontalAlignment="Left" Margin="25,25,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="InterestRate_Text" HorizontalAlignment="Left"  BorderThickness="0,0,0,1" Height="18" Margin="70,25,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="60"/>
-        <Label Content="%" HorizontalAlignment="Left" Margin="125,25,0,0" VerticalAlignment="Top"/>
-        <Label Content="标类型：" HorizontalAlignment="Left" Margin="155,25,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="Mark_ComboBox" HorizontalAlignment="Left" Margin="215,25,0,0" VerticalAlignment="Top" Width="70"/>
-        <Label Content="还款方式：" HorizontalAlignment="Left" Margin="305,25,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="Repayment_ComboBox" HorizontalAlignment="Left" Margin="375,25,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="借款时间：" HorizontalAlignment="Left" Margin="515,25,0,0" VerticalAlignment="Top" Width="70"/>
-        <TextBox x:Name="Hour_Text" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0,0,0,1"  Height="18" Margin="580,25,0,0" VerticalAlignment="Top" Width="40"/>
-        <Label Content="时" HorizontalAlignment="Left" Margin="620,25,0,0" VerticalAlignment="Top" Width="25"/>
-        <TextBox x:Name="Minute_Text" HorizontalAlignment="Left" Height="18" BorderThickness="0,0,0,1"  Margin="640,25,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
-        <Label Content="分" HorizontalAlignment="Left" Margin="680,25,0,0" VerticalAlignment="Top" Width="30"/>
-        <TextBox x:Name="Second_Text" HorizontalAlignment="Left" Height="18" BorderThickness="0,0,0,1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Margin="700,25,0,0" VerticalAlignment="Top" Width="40"/>
-        <Label Content="秒" HorizontalAlignment="Left" Margin="740,25,0,0" VerticalAlignment="Top" Width="30"/>
-        <Button x:Name="Save_Button" Content="保存" HorizontalAlignment="Left" Margin="780,25,0,0" VerticalAlignment="Top" Width="70"/>
-        <Button x:Name="Import_Button" Content="导入" HorizontalAlignment="Left" Margin="870,25,0,0" VerticalAlignment="Top" Width="70"/>
+
+        <Button x:Name="Insert_Button" Content="插入" HorizontalAlignment="Left" Margin="870,15,0,0" VerticalAlignment="Top" Width="70" Click="Insert_Button_Click"/>
+        <TextBox x:Name="AutomaticBid_Text" HorizontalAlignment="Left"  BorderThickness="0,0,0,1" Height="18" Margin="780,15,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="60"/>
+        
+        <Label Content="利率：" HorizontalAlignment="Left" Margin="25,45,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="InterestRate_Text" HorizontalAlignment="Left"  BorderThickness="0,0,0,1" Height="18" Margin="70,45,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="60"/>
+        <Label Content="%" HorizontalAlignment="Left" Margin="125,45,0,0" VerticalAlignment="Top"/>
+        <Label Content="标类型：" HorizontalAlignment="Left" Margin="155,45,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="Mark_ComboBox" HorizontalAlignment="Left" Margin="215,45,0,0" VerticalAlignment="Top" Width="70"/>
+        <Label Content="还款方式：" HorizontalAlignment="Left" Margin="305,45,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="Repayment_ComboBox" HorizontalAlignment="Left" Margin="375,45,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="借款时间：" HorizontalAlignment="Left" Margin="515,45,0,0" VerticalAlignment="Top" Width="70"/>
+        <TextBox x:Name="Hour_Text" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0,0,0,1"  Height="18" Margin="580,45,0,0" VerticalAlignment="Top" Width="40"/>
+        <Label Content="时" HorizontalAlignment="Left" Margin="620,45,0,0" VerticalAlignment="Top" Width="25"/>
+        <TextBox x:Name="Minute_Text" HorizontalAlignment="Left" Height="18" BorderThickness="0,0,0,1"  Margin="640,45,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="40"/>
+        <Label Content="分" HorizontalAlignment="Left" Margin="680,45,0,0" VerticalAlignment="Top" Width="30"/>
+        <TextBox x:Name="Second_Text" HorizontalAlignment="Left" Height="18" BorderThickness="0,0,0,1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Margin="700,45,0,0" VerticalAlignment="Top" Width="40"/>
+        <Label Content="秒" HorizontalAlignment="Left" Margin="740,45,0,0" VerticalAlignment="Top" Width="30"/>
+        <Button x:Name="Save_Button" Content="保存" HorizontalAlignment="Left" Margin="780,45,0,0" VerticalAlignment="Top" Width="70"/>
+        <Button x:Name="Import_Button" Content="导入" HorizontalAlignment="Left" Margin="870,45,0,0" VerticalAlignment="Top" Width="70"/>
     </Grid>
 </Window>
