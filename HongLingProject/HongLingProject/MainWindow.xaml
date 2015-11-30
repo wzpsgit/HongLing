@@ -35,7 +35,6 @@
             <Label Content="自动排名：" HorizontalAlignment="Left" Margin="25,45,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="AutomaticBid_Text" HorizontalAlignment="Left"  BorderThickness="0,0,0,1" Height="18" Margin="90,45,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="60"/>
             <Button x:Name="Insert_Button" Content="插入" HorizontalAlignment="Left" Margin="165,45,0,0" VerticalAlignment="Top" Width="70" Click="Insert_Button_Click"/>
-            
         </Grid>
     </Grid>
 </Window>
