@@ -31,5 +31,10 @@ namespace HongLingProject.DAL
 
             return DBhelper.ExecuteNonQuery(sql, param);
         }
+
+        public int BathInsertInterestRate(List<DataTable> lsDt,string[] excelColumns)
+        {
+            return 0;
+        }
     }
 }

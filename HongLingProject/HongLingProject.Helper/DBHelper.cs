@@ -108,6 +108,29 @@ namespace HongLingProject.Helper
             }
         }
 
+        /// <summary>
+        /// 批量执行非查询语句
+        /// </summary>
+        /// <param name="sqlString">SQL语句</param>
+        /// <param name="lsCmdParams">命令参数</param>
+        /// <returns></returns>
+        public static int BatchExecuteNonQuery(string sqlString,List<IEnumerable<SqlParameter>> lsCmdParams)
+        {
+            using (var conn = new SqlConnection(ConnectionString))
+            {
+                int affectedRows = 0;
+                foreach(var cmdParam in lsCmdParams)
+                {
+                    var cmd = new SqlCommand();
+                    PrepareCommand(cmd, conn, null, sqlString, cmdParam);
+                    affectedRows += cmd.ExecuteNonQuery();
+                    cmd.Dispose();
+                }
+                conn.Close();
+                return affectedRows;
+            }
+        }
+
 
         private static void PrepareCommand(SqlCommand cmd, SqlConnection conn, SqlTransaction trans, string cmdText, IEnumerable<SqlParameter> cmdParams)
         {

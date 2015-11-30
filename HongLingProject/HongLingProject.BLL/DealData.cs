@@ -32,9 +32,20 @@ namespace HongLingProject.BLL
             return DealDataTable(queryData.QueryPaymentMethod());
         }
 
+        /// <summary>
+        /// 插入自动排名
+        /// </summary>
+        /// <param name="No"></param>
+        /// <returns></returns>
         public bool InsertAutoBid(int No)
         {
             return insertData.InsertAutoBid(No) > 0 ? true : false;
+        }
+
+        public string GetPersonalAction(string key)
+        {
+            var dt = queryData.QueryPersonalAction(key);
+            return dt.Rows[0][0].ToString();
         }
 
         private List<ComboBoxModel> DealDataTable(DataTable dt)
@@ -46,5 +57,40 @@ namespace HongLingProject.BLL
             }
             return lsComb;
         }
+
+        public bool ReadInterestRate(string fileName,out string errorMsg)
+        {
+            string[] ExcelColumns = new string[] { "利率", "标类型", "还款方式", "借款时间", "借款期限" };
+            var lsDt = ExcelHelper.ReadWholeExcel(fileName);
+            //逐个DataTable校验
+            int Count = lsDt.Count;
+            for (int i = 0; i < Count; i++)
+            {
+                if(lsDt[i].Rows.Count==0)
+                {
+                    i--;Count--;
+                    lsDt.RemoveAt(i);
+                    continue;
+                }
+                foreach (var col in ExcelColumns)
+                {
+                    if (!lsDt[i].Columns.Contains(col))
+                    {
+                        i--; Count--;
+                        lsDt.RemoveAt(i);
+                        break;
+                    }
+                }
+            }
+
+            if (Count == 0)
+            {
+                errorMsg = "Excel 模板错误或导入模板为空.";
+                return false;
+            }
+            errorMsg = null;
+            return true;
+        }
+
     }
 }

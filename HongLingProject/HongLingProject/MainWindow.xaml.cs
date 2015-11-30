@@ -14,6 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HongLingProject.BLL;
 using HongLingProject.Helper;
+using System.Windows.Forms;
+using ComboBox = System.Windows.Controls.ComboBox;
+using MessageBox = System.Windows.MessageBox;
 
 namespace HongLingProject
 {
@@ -93,6 +96,25 @@ namespace HongLingProject
         {
             InterestRateMenu.Visibility = Visibility.Hidden;
             AutoBidMenu.Visibility = Visibility.Visible;
+        }
+
+        private void Save_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Import_Button_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Excel文件(*.xls;*.xlsx)|*.xls;*.xlsx";
+            //设置默认打开目录
+            openFileDialog.InitialDirectory= dealData.GetPersonalAction("ImportInterestRate");
+            openFileDialog.Multiselect = false;
+
+            if (openFileDialog.ShowDialog()==System.Windows.Forms.DialogResult.OK)
+            {
+                
+            }
         }
     }
 }

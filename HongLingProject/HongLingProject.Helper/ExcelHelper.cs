@@ -15,7 +15,7 @@ namespace HongLingProject.Helper
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        public List<DataTable> ReadWholeExcel(string filePath)
+        public static List<DataTable> ReadWholeExcel(string filePath)
         {
             List<DataTable> lsDt= new List<DataTable>();
             Workbook wb = new Workbook(filePath);
@@ -32,7 +32,7 @@ namespace HongLingProject.Helper
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        public DataTable RedExcel(string filePath)
+        public static DataTable RedExcel(string filePath)
         {
             var sheet = new Workbook(filePath).Worksheets[0];
             return sheet.Cells.ExportDataTable(0, 0, sheet.Cells.MaxRow + 1, sheet.Cells.MaxColumn + 1, true);
