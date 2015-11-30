@@ -70,7 +70,29 @@ namespace HongLingProject
         private void Insert_Button_Click(object sender, RoutedEventArgs e)
         {
             int AutoBidNo = int.Parse(AutomaticBid_Text.Text);
-            dealData.InsertAutoBid(AutoBidNo);
+            MessageBox.Show(dealData.InsertAutoBid(AutoBidNo) ? "插入成功" : "插入失败");
+        }
+
+        /// <summary>
+        /// 利率的菜单点击
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void InterestRate_Menu_Click(object sender, RoutedEventArgs e)
+        {
+            InterestRateMenu.Visibility = Visibility.Visible;
+            AutoBidMenu.Visibility = Visibility.Hidden;
+        }
+
+        /// <summary>
+        /// 自动排名菜单点击
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AutoBid_Menu_Click(object sender, RoutedEventArgs e)
+        {
+            InterestRateMenu.Visibility = Visibility.Hidden;
+            AutoBidMenu.Visibility = Visibility.Visible;
         }
     }
 }
