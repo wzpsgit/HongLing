@@ -32,9 +32,41 @@ namespace HongLingProject.DAL
             return DBhelper.ExecuteNonQuery(sql, param);
         }
 
-        public int BathInsertInterestRate(List<DataTable> lsDt,string[] excelColumns)
+        public int BathInsertInterestRate(List<InterestRateModel> lsRate)
         {
-            return 0;
+            string sql = @"SELECT @markTypeID=ID FROM dbo.MarkType WHERE DisplayName=@MarkTypeName
+            SELECT @paymentMethodID=ID FROM dbo.PaymentMethod WHERE DisplayName=@paymentMethod
+
+            INSERT INTO dbo.InterestRate
+                    ( InterestRate ,
+                      MarkTypeID ,
+                      PaymentMethodID ,
+                      LoadTime ,
+                      TimeLimit
+                    )
+            VALUES  ( @interestRate , -- InterestRate - float
+                      @markTypeID ,-- MarkTypeID - int
+                      @paymentMethodID ,-- PaymentMethodID - int
+                      @loadTime , -- LoadTime - time
+                      0  -- TimeLimit - int
+                    )";
+            var lsParam = new List<SqlParameter[]>();
+            foreach(var rt in lsRate)
+            {
+                SqlParameter[] param = new SqlParameter[]
+                {
+                    new SqlParameter("@interestRate",SqlDbType.Float) {Value=rt.InterestRate }
+                    ,new SqlParameter("@markTypeName",SqlDbType.NVarChar) {Value=rt.MarkTypeName }
+                    ,new SqlParameter("@paymentMethod",SqlDbType.NVarChar) {Value=rt.PaymentMethod }
+                    ,new SqlParameter("@loadTime",SqlDbType.Time) {Value=rt.LoadTime }
+                    ,new SqlParameter("@timeLimit",SqlDbType.Int) {Value=rt.TimeLimit }
+                    ,new SqlParameter("@markTypeID",SqlDbType.Int) {Value=0 }
+                    ,new SqlParameter("@paymentMethodID",SqlDbType.Int) {Value=0 }
+                };
+                lsParam.Add(param);
+            }
+
+           return DBhelper.BatchExecuteNonQuery(sql, lsParam);
         }
     }
 }

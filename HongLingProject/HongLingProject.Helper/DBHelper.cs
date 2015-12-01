@@ -114,7 +114,7 @@ namespace HongLingProject.Helper
         /// <param name="sqlString">SQL语句</param>
         /// <param name="lsCmdParams">命令参数</param>
         /// <returns></returns>
-        public static int BatchExecuteNonQuery(string sqlString,List<IEnumerable<SqlParameter>> lsCmdParams)
+        public static int BatchExecuteNonQuery(string sqlString,List<SqlParameter[]> lsCmdParams)
         {
             using (var conn = new SqlConnection(ConnectionString))
             {

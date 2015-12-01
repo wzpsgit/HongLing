@@ -88,8 +88,29 @@ namespace HongLingProject.BLL
                 errorMsg = "Excel 模板错误或导入模板为空.";
                 return false;
             }
+
+            var lsRate = new List<InterestRateModel>();
+            foreach(var dt in lsDt)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    var rate = new InterestRateModel()
+                    {
+                        InterestRate = float.Parse(dr["利率"].ToString())
+                        ,
+                        MarkTypeName = dr["标类型"].ToString()
+                        ,
+                        PaymentMethod = dr["还款方式"].ToString()
+                        ,
+                        LoadTime = DateTime.Parse(dr["借款时间"].ToString())
+                        ,
+                        TimeLimit = int.Parse(dr["借款期限"].ToString())
+                    };
+                    lsRate.Add(rate);
+                }
+            }
             errorMsg = null;
-            return true;
+            return insertData.BathInsertInterestRate(lsRate)>0;
         }
 
     }

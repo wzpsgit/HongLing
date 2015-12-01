@@ -21,4 +21,28 @@ namespace HongLingProject.Helper
         /// </summary>
         public bool IsDefault { get; set; }
     }
+
+    public class InterestRateModel
+    {
+        /// <summary>
+        /// 利率
+        /// </summary>
+        public float InterestRate { get; set; }
+        /// <summary>
+        /// 标类型
+        /// </summary>
+        public string MarkTypeName { get; set; }
+        /// <summary>
+        /// 还款方式
+        /// </summary>
+        public string PaymentMethod { get; set; }
+        /// <summary>
+        /// 借款时间
+        /// </summary>
+        public DateTime LoadTime { get; set; }
+        /// <summary>
+        /// 借款时长
+        /// </summary>
+        public int TimeLimit { get; set; }
+    }
 }
