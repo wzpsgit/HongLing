@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HongLingProject.DAL", "Hong
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HongLingProject.Helper", "HongLingProject.Helper\HongLingProject.Helper.csproj", "{DDDAC91A-5A74-4645-AA1B-D5B859FF0246}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HongLingTest", "HongLingTest\HongLingTest.csproj", "{8411B926-E5B0-46D7-94AA-EE3EAA0FF25B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{DDDAC91A-5A74-4645-AA1B-D5B859FF0246}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDDAC91A-5A74-4645-AA1B-D5B859FF0246}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDDAC91A-5A74-4645-AA1B-D5B859FF0246}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8411B926-E5B0-46D7-94AA-EE3EAA0FF25B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8411B926-E5B0-46D7-94AA-EE3EAA0FF25B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8411B926-E5B0-46D7-94AA-EE3EAA0FF25B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8411B926-E5B0-46D7-94AA-EE3EAA0FF25B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

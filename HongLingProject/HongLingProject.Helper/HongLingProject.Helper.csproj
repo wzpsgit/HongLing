@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="DBHelper.cs" />
     <Compile Include="ExcelHelper.cs" />
+    <Compile Include="HttpHelper.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

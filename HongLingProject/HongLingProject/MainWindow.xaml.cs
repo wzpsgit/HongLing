@@ -15,6 +15,11 @@ using System.Windows.Shapes;
 using HongLingProject.BLL;
 using HongLingProject.Helper;
 using System.Windows.Forms;
+using Microsoft.Research.DynamicDataDisplay;
+using Microsoft.Research.DynamicDataDisplay.DataSources;
+using System.Diagnostics;
+using System.Windows.Threading;
+
 using ComboBox = System.Windows.Controls.ComboBox;
 using MessageBox = System.Windows.MessageBox;
 
@@ -25,6 +30,10 @@ namespace HongLingProject
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ObservableDataSource<Point> dataSource = new ObservableDataSource<Point>();
+        private DispatcherTimer timer = new DispatcherTimer();
+        private int i = 0;
+
         DealData dealData = new DealData();
         public MainWindow()
         {
@@ -32,6 +41,27 @@ namespace HongLingProject
             MarkBind();
             PaymentMethodBind();
             TimeBind();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            plotter.AddLineGraph(dataSource, Colors.Green, 2, "Percentage");
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += new EventHandler(AnimatedPlot);
+            timer.IsEnabled = true;
+            plotter.Viewport.FitToView();
+        }
+
+        private void AnimatedPlot(object sender, EventArgs e)
+        {
+            double x = i;
+            double y = new Random().Next(100);
+
+            Point point = new Point(x, y);
+            dataSource.AppendAsync(base.Dispatcher, point);
+
+            cpuUsageText.Text = String.Format("{0:0}%", y);
+            i++;
         }
 
         /// <summary>
