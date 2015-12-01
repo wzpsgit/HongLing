@@ -27,7 +27,7 @@ namespace HongLingProject.Helper
         /// <summary>
         /// 利率
         /// </summary>
-        public float InterestRate { get; set; }
+        public decimal InterestRate { get; set; }
         /// <summary>
         /// 标类型
         /// </summary>

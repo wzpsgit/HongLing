@@ -32,6 +32,11 @@ namespace HongLingProject.DAL
             return DBhelper.ExecuteNonQuery(sql, param);
         }
 
+        /// <summary>
+        /// 批量插入利率
+        /// </summary>
+        /// <param name="lsRate"></param>
+        /// <returns></returns>
         public int BathInsertInterestRate(List<InterestRateModel> lsRate)
         {
             string sql = @"SELECT @markTypeID=ID FROM dbo.MarkType WHERE DisplayName=@MarkTypeName
@@ -48,17 +53,17 @@ namespace HongLingProject.DAL
                       @markTypeID ,-- MarkTypeID - int
                       @paymentMethodID ,-- PaymentMethodID - int
                       @loadTime , -- LoadTime - time
-                      0  -- TimeLimit - int
+                      @timeLimit  -- TimeLimit - int
                     )";
             var lsParam = new List<SqlParameter[]>();
             foreach(var rt in lsRate)
             {
                 SqlParameter[] param = new SqlParameter[]
                 {
-                    new SqlParameter("@interestRate",SqlDbType.Float) {Value=rt.InterestRate }
+                    new SqlParameter("@interestRate",SqlDbType.Decimal) {Value=rt.InterestRate }
                     ,new SqlParameter("@markTypeName",SqlDbType.NVarChar) {Value=rt.MarkTypeName }
                     ,new SqlParameter("@paymentMethod",SqlDbType.NVarChar) {Value=rt.PaymentMethod }
-                    ,new SqlParameter("@loadTime",SqlDbType.Time) {Value=rt.LoadTime }
+                    ,new SqlParameter("@loadTime",SqlDbType.DateTime) {Value=rt.LoadTime }
                     ,new SqlParameter("@timeLimit",SqlDbType.Int) {Value=rt.TimeLimit }
                     ,new SqlParameter("@markTypeID",SqlDbType.Int) {Value=0 }
                     ,new SqlParameter("@paymentMethodID",SqlDbType.Int) {Value=0 }
@@ -68,5 +73,25 @@ namespace HongLingProject.DAL
 
            return DBhelper.BatchExecuteNonQuery(sql, lsParam);
         }
+
+        /// <summary>
+        /// 设置私人操作
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void SetPersonalAction(string key,string value)
+        {
+            string sql = @"UPDATE dbo.PersonalAction SET Value=@value WHERE [Key]=@key";
+
+            SqlParameter[] param = new SqlParameter[]
+            {
+                new SqlParameter("@key",SqlDbType.NVarChar) {Value=key }
+                ,new SqlParameter("@value",SqlDbType.NVarChar) {Value=value }
+            };
+
+            DBhelper.ExecuteNonQuery(sql, param);
+        }
+
+        
     }
 }

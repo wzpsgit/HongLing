@@ -48,6 +48,11 @@ namespace HongLingProject.BLL
             return dt.Rows[0][0].ToString();
         }
 
+        public void SetPersonalAction(string key,string value)
+        {
+            insertData.SetPersonalAction(key, value);
+        }
+
         private List<ComboBoxModel> DealDataTable(DataTable dt)
         {
             var lsComb = new List<ComboBoxModel>();
@@ -90,24 +95,30 @@ namespace HongLingProject.BLL
             }
 
             var lsRate = new List<InterestRateModel>();
-            foreach(var dt in lsDt)
-            {
-                foreach (DataRow dr in dt.Rows)
+            try {
+                foreach (var dt in lsDt)
                 {
-                    var rate = new InterestRateModel()
+                    foreach (DataRow dr in dt.Rows)
                     {
-                        InterestRate = float.Parse(dr["利率"].ToString())
-                        ,
-                        MarkTypeName = dr["标类型"].ToString()
-                        ,
-                        PaymentMethod = dr["还款方式"].ToString()
-                        ,
-                        LoadTime = DateTime.Parse(dr["借款时间"].ToString())
-                        ,
-                        TimeLimit = int.Parse(dr["借款期限"].ToString())
-                    };
-                    lsRate.Add(rate);
+                        var rate = new InterestRateModel()
+                        {
+                            InterestRate = decimal.Parse(dr["利率"].ToString())
+                            ,
+                            MarkTypeName = dr["标类型"].ToString()
+                            ,
+                            PaymentMethod = dr["还款方式"].ToString()
+                            ,
+                            LoadTime = DateTime.Parse(dr["借款时间"].ToString())
+                            ,
+                            TimeLimit = int.Parse(dr["借款期限"].ToString())
+                        };
+                        lsRate.Add(rate);
+                    }
                 }
+            }catch(Exception ex)
+            {
+                errorMsg = ex.Message;
+                return false;
             }
             errorMsg = null;
             return insertData.BathInsertInterestRate(lsRate)>0;

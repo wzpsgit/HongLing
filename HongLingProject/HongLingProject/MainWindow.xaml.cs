@@ -105,6 +105,7 @@ namespace HongLingProject
 
         private void Import_Button_Click(object sender, RoutedEventArgs e)
         {
+            string errorMsg = null;
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Excel文件(*.xls;*.xlsx)|*.xls;*.xlsx";
             //设置默认打开目录
@@ -113,7 +114,16 @@ namespace HongLingProject
 
             if (openFileDialog.ShowDialog()==System.Windows.Forms.DialogResult.OK)
             {
-                
+                string directory = openFileDialog.FileName.Substring(0, openFileDialog.FileName.LastIndexOf('\\'));
+                dealData.SetPersonalAction("ImportInterestRate",directory);
+                if(dealData.ReadInterestRate(openFileDialog.FileName, out errorMsg))
+                {
+                    MessageBox.Show("导入成功");
+                }
+                else
+                {
+                    MessageBox.Show("导入失败");
+                }
             }
         }
     }
