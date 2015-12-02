@@ -35,6 +35,7 @@ namespace HongLingProject
         private int i = 0;
 
         DealData dealData = new DealData();
+        DealHttpData dealHttpData = new DealHttpData();
         public MainWindow()
         {
             InitializeComponent();
@@ -46,12 +47,17 @@ namespace HongLingProject
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             plotter.AddLineGraph(dataSource, Colors.Green, 2, "Percentage");
-            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Interval = TimeSpan.FromSeconds(60);
             timer.Tick += new EventHandler(AnimatedPlot);
+            timer.Tick += new EventHandler(GetHttpData);
             timer.IsEnabled = true;
             plotter.Viewport.FitToView();
         }
 
+        private void GetHttpData(object sender, EventArgs e)
+        {
+            dealHttpData.SaveHttpData();
+        }
         private void AnimatedPlot(object sender, EventArgs e)
         {
             double x = i;

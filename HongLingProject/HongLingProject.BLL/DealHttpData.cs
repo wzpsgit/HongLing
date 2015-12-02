@@ -41,6 +41,7 @@ namespace HongLingProject.BLL
         private static readonly string MarkTypeMark = "<a href=\"/Loan/CateInfo.aspx\" target=\"_blank\">";
         private static readonly string MarkTypeMark2= "class=\"";
         private static readonly string MarkTypeEndMark = "\">";
+
         private static Dictionary<string, string> MarkTypeDic;
 
         #endregion 私有全局变量
