@@ -47,7 +47,7 @@ namespace HongLingProject
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             plotter.AddLineGraph(dataSource, Colors.Green, 2, "Percentage");
-            timer.Interval = TimeSpan.FromSeconds(60);
+            timer.Interval = TimeSpan.FromSeconds(600);
             timer.Tick += new EventHandler(AnimatedPlot);
             timer.Tick += new EventHandler(GetHttpData);
             timer.IsEnabled = true;
