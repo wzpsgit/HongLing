@@ -20,8 +20,8 @@ using Microsoft.Research.DynamicDataDisplay.DataSources;
 using System.Diagnostics;
 using System.Windows.Threading;
 
-using ComboBox = System.Windows.Controls.ComboBox;
 using MessageBox = System.Windows.MessageBox;
+using Microsoft.Research.DynamicDataDisplay.PointMarkers;
 
 namespace HongLingProject
 {
@@ -30,7 +30,6 @@ namespace HongLingProject
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ObservableDataSource<Point> dataSource = new ObservableDataSource<Point>();
         private DispatcherTimer timer = new DispatcherTimer();
         private int i = 0;
 
@@ -43,12 +42,11 @@ namespace HongLingProject
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            plotter.AddLineGraph(dataSource, Colors.Green, 2, "Percentage");
-            timer.Interval = TimeSpan.FromSeconds(600);
-            timer.Tick += new EventHandler(AnimatedPlot);
-            timer.Tick += new EventHandler(GetHttpData);
-            timer.IsEnabled = true;
-            plotter.Viewport.FitToView();
+            AnimatedPlot(null, null);
+            //timer.Interval = TimeSpan.FromSeconds(600);
+            //timer.Tick += new EventHandler(AnimatedPlot);
+            //timer.Tick += new EventHandler(GetHttpData);
+            //timer.IsEnabled = true;
         }
 
         private void GetHttpData(object sender, EventArgs e)
@@ -57,14 +55,23 @@ namespace HongLingProject
         }
         private void AnimatedPlot(object sender, EventArgs e)
         {
-            double x = i;
-            double y = new Random().Next(100);
+            DateTime[] dates;
+            decimal[] interestRate;
+            dealData.ReadInterestRate(out dates, out interestRate);
+            var datesDataSource = new EnumerableDataSource<DateTime>(dates);
 
-            Point point = new Point(x, y);
-            dataSource.AppendAsync(base.Dispatcher, point);
+            datesDataSource.SetXMapping(x => dateAxis.ConvertToDouble(x));
+            var interestRateDataSource = new EnumerableDataSource<decimal>(interestRate);
+            interestRateDataSource.SetYMapping(y => interestAxis.ConvertToDouble((int)(y*100))/100);
 
-            cpuUsageText.Text = String.Format("{0:0}%", y);
-            i++;
+            var compositeDataSource = new   CompositeDataSource(datesDataSource, interestRateDataSource);
+
+            plotter.AddLineGraph(compositeDataSource,
+                new Pen(Brushes.Blue, 2),
+                new CirclePointMarker { Size = 10.0, Fill = Brushes.Red },
+                new PenDescription("Interest Rate"));
+
+            plotter.Viewport.FitToView();
         }
 
         private void Insert_Button_Click(object sender, RoutedEventArgs e)

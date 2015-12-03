@@ -46,5 +46,15 @@ namespace HongLingProject.DAL
 
             return DBhelper.ExecuteDataTable(sql, param);
         }
+
+        /// <summary>
+        /// 利率查询
+        /// </summary>
+        /// <returns></returns>
+        public DataTable QueryInterestRate()
+        {
+            string sql = @"SELECT InterestRate,LoadTime FROM dbo.InterestRate ORDER BY LoadTime ASC";
+            return DBhelper.ExecuteDataTable(sql);
+        }
     }
 }

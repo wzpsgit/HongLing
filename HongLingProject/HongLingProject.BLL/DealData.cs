@@ -124,5 +124,36 @@ namespace HongLingProject.BLL
             return insertData.BathInsertInterestRate(lsRate)>0;
         }
 
+        /// <summary>
+        /// 读取利率
+        /// </summary>
+        /// <returns></returns>
+        private List<string[]> ReadInterestRate()
+        {
+            List<string[]> lsStrArray = new List<string[]>();
+            var dt = queryData.QueryInterestRate();
+            foreach(DataRow dr in dt.Rows)
+            {
+                string[] strArray = new string[2] { dr[0].ToString(), dr[1].ToString() };
+                lsStrArray.Add(strArray);
+            }
+
+            return lsStrArray;
+        }
+
+        public void ReadInterestRate(out DateTime[] dateArray,out decimal[] interestRateArray)
+        {
+            var lsStrArray = ReadInterestRate();
+            dateArray = new DateTime[lsStrArray.Count];
+            interestRateArray = new decimal[lsStrArray.Count];
+            int i = 0;
+            foreach(var array in lsStrArray)
+            {
+                interestRateArray[i] = decimal.Parse(array[0]);
+                dateArray[i] = DateTime.Parse(array[1]);
+                i++;
+            }
+        }
+
     }
 }
