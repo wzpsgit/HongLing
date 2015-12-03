@@ -42,11 +42,10 @@ namespace HongLingProject
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            AnimatedPlot(null, null);
-            //timer.Interval = TimeSpan.FromSeconds(600);
-            //timer.Tick += new EventHandler(AnimatedPlot);
-            //timer.Tick += new EventHandler(GetHttpData);
-            //timer.IsEnabled = true;
+            timer.Interval = TimeSpan.FromSeconds(60);
+            timer.Tick += new EventHandler(AnimatedPlot);
+            timer.Tick += new EventHandler(GetHttpData);
+            timer.IsEnabled = true;
         }
 
         private void GetHttpData(object sender, EventArgs e)

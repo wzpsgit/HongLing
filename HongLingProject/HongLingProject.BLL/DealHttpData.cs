@@ -76,45 +76,44 @@ namespace HongLingProject.BLL
             string[] strArray = webData.Split(SpiltString, StringSplitOptions.RemoveEmptyEntries);
             var lsRate = new List<InterestRateModel>();
 
-            for (int i = 1; i < 11; i++)
+            int i = 1;
+
+            var rate = new InterestRateModel();
+            //利率
+            string interestRate = strArray[i].Substring(strArray[i].IndexOf(IntersetRateMark) + IntersetRateMark.Length);
+            interestRate = interestRate.Substring(0, interestRate.IndexOf(IntersetRateEndMark));
+            //借款时间
+            string loadTime = strArray[i].Substring(strArray[i].IndexOf(LoadTimeMark)+LoadTimeMark.Length);
+            loadTime = loadTime.Substring(0, loadTime.IndexOf(LoadTimeEndMark));
+            //标类型
+            string markType = strArray[i].Substring(strArray[i].IndexOf(MarkTypeMark));
+            markType = markType.Substring(markType.IndexOf(MarkTypeMark2)+MarkTypeMark2.Length);
+            markType = markType.Substring(0, markType.IndexOf(MarkTypeEndMark));
+            //期限还款方式
+            string timePayment = strArray[i].Substring(strArray[i].IndexOf(TimePaymentMark) + TimePaymentMark.Length);
+            timePayment = timePayment.Substring(0, timePayment.IndexOf(TimePaymentEndMark));
+            timePayment = timePayment.Replace(" ", "");
+
+            int spanIndex = timePayment.IndexOf("</span>");
+            //期限
+            int timeLimint =int.Parse(timePayment.Substring(0,spanIndex));
+            timePayment = timePayment.Substring(spanIndex + "</span>".Length);
+            //3</span>个月/按月分期
+            if (timePayment.Substring(0, timePayment.IndexOf("/")).Contains("月"))
             {
-                var rate = new InterestRateModel();
-                //利率
-                string interestRate = strArray[i].Substring(strArray[i].IndexOf(IntersetRateMark) + IntersetRateMark.Length);
-                interestRate = interestRate.Substring(0, interestRate.IndexOf(IntersetRateEndMark));
-                //借款时间
-                string loadTime = strArray[i].Substring(strArray[i].IndexOf(LoadTimeMark)+LoadTimeMark.Length);
-                loadTime = loadTime.Substring(0, loadTime.IndexOf(LoadTimeEndMark));
-                //标类型
-                string markType = strArray[i].Substring(strArray[i].IndexOf(MarkTypeMark));
-                markType = markType.Substring(markType.IndexOf(MarkTypeMark2)+MarkTypeMark2.Length);
-                markType = markType.Substring(0, markType.IndexOf(MarkTypeEndMark));
-                //期限还款方式
-                string timePayment = strArray[i].Substring(strArray[i].IndexOf(TimePaymentMark) + TimePaymentMark.Length);
-                timePayment = timePayment.Substring(0, timePayment.IndexOf(TimePaymentEndMark));
-                timePayment = timePayment.Replace(" ", "");
-
-                int spanIndex = timePayment.IndexOf("</span>");
-                //期限
-                int timeLimint =int.Parse(timePayment.Substring(0,spanIndex));
-                timePayment = timePayment.Substring(spanIndex + "</span>".Length);
-                //3</span>个月/按月分期
-                if (timePayment.Substring(0, timePayment.IndexOf("/")).Contains("月"))
-                {
-                    //一个月按30天算
-                    timeLimint *= 30;
-                }
-                //还款方式
-                string paymentMethod = timePayment.Substring(timePayment.IndexOf("/") + "/".Length);
-
-                rate.InterestRate = decimal.Parse(interestRate);
-                rate.MarkTypeName = MarkTypeDic[markType];
-                rate.PaymentMethod = paymentMethod;
-                rate.LoadTime = DateTime.Parse(loadTime);
-                rate.TimeLimit = timeLimint;
-
-                lsRate.Add(rate);
+                //一个月按30天算
+                timeLimint *= 30;
             }
+            //还款方式
+            string paymentMethod = timePayment.Substring(timePayment.IndexOf("/") + "/".Length);
+
+            rate.InterestRate = decimal.Parse(interestRate);
+            rate.MarkTypeName = MarkTypeDic[markType];
+            rate.PaymentMethod = paymentMethod;
+            rate.LoadTime = DateTime.Parse(loadTime);
+            rate.TimeLimit = timeLimint;
+
+            lsRate.Add(rate);
 
             return lsRate;
         }
