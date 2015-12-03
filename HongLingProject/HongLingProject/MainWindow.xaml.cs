@@ -43,7 +43,7 @@ namespace HongLingProject
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             timer.Interval = TimeSpan.FromSeconds(60);
-            timer.Tick += new EventHandler(AnimatedPlot);
+            //timer.Tick += new EventHandler(AnimatedPlot);
             timer.Tick += new EventHandler(GetHttpData);
             timer.IsEnabled = true;
         }
@@ -51,8 +51,9 @@ namespace HongLingProject
         private void GetHttpData(object sender, EventArgs e)
         {
             dealHttpData.SaveHttpData();
+            AnimatedPlot();
         }
-        private void AnimatedPlot(object sender, EventArgs e)
+        private void AnimatedPlot()
         {
             DateTime[] dates;
             decimal[] interestRate;
