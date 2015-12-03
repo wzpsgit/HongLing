@@ -15,7 +15,7 @@
             </MenuItem>
         </Menu>
         <Grid Name="InterestRateMenu" Visibility="Visible">
-            <Label Content="利率：" HorizontalAlignment="Left" Margin="25,45,0,0" VerticalAlignment="Top"/>
+            <!--<Label Content="利率：" HorizontalAlignment="Left" Margin="25,45,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="InterestRate_Text" HorizontalAlignment="Left"  BorderThickness="0,0,0,1" Height="18" Margin="70,45,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="60"/>
             <Label Content="%" HorizontalAlignment="Left" Margin="125,45,0,0" VerticalAlignment="Top"/>
             <Label Content="标类型：" HorizontalAlignment="Left" Margin="155,45,0,0" VerticalAlignment="Top"/>
@@ -30,7 +30,7 @@
             <TextBox x:Name="Second_Text" HorizontalAlignment="Left" Height="18" BorderThickness="0,0,0,1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Margin="700,45,0,0" VerticalAlignment="Top" Width="40"/>
             <Label Content="秒" HorizontalAlignment="Left" Margin="740,45,0,0" VerticalAlignment="Top" Width="30"/>
             <Button x:Name="Save_Button" Content="保存" HorizontalAlignment="Left" Margin="780,45,0,0" VerticalAlignment="Top" Width="70" Click="Save_Button_Click"/>
-            <Button x:Name="Import_Button" Content="导入" HorizontalAlignment="Left" Margin="870,45,0,0" VerticalAlignment="Top" Width="70" Click="Import_Button_Click"/>
+            <Button x:Name="Import_Button" Content="导入" HorizontalAlignment="Left" Margin="870,45,0,0" VerticalAlignment="Top" Width="70" Click="Import_Button_Click"/>-->
         </Grid>
         <Grid Name="AutoBidMenu" Visibility="Hidden">
             <Label Content="自动排名：" HorizontalAlignment="Left" Margin="25,45,0,0" VerticalAlignment="Top"/>
