@@ -50,8 +50,15 @@ namespace HongLingProject.BLL
         public DealHttpData()
         {
             MarkTypeDic = new Dictionary<string, string>();
+            MarkTypeDic.Add("SubL1", "信用标");
             MarkTypeDic.Add("SubL90", "净值标");
+            MarkTypeDic.Add("SubL50", "快借标");
+            MarkTypeDic.Add("SubL60", "推荐标");
             MarkTypeDic.Add("SubL110", "资产标");
+            MarkTypeDic.Add("SubL20", "秒还标");
+            MarkTypeDic.Add("SubL120", "公信贷");
+            MarkTypeDic.Add("SubL130", "特定标");
+            MarkTypeDic.Add("SubL150", "议标");
         }
 
         /// <summary>
