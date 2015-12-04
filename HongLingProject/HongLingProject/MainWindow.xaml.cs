@@ -52,11 +52,8 @@ namespace HongLingProject
             interestRateDataSource.SetYMapping(y => interestAxis.ConvertToDouble((int)(y * 100)) / 100);
 
             var compositeDataSource = new CompositeDataSource(datesDataSource, interestRateDataSource);
-            
-            plotter.AddLineGraph(compositeDataSource,
-                new Pen(Brushes.Blue, 2),
-                new CirclePointMarker { Size = 10.0, Fill = Brushes.Red },
-                new PenDescription("Interest Rate"));
+
+            plotter.AddLineGraph(compositeDataSource,Colors.Green,1,"Interest Rate");
 
             plotter.Viewport.FitToView();
             timer.Interval = TimeSpan.FromSeconds(6);
