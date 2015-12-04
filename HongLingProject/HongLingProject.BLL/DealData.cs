@@ -146,13 +146,17 @@ namespace HongLingProject.BLL
         /// </summary>
         /// <param name="dateArray"></param>
         /// <param name="interestRateArray"></param>
-        /// <param name="lsRateModel"></param>
-        public void ReadInterestRate(ref List<DateTime> dateArray,ref List<decimal> interestRateArray, List<InterestRateModel> lsRateModel)
+        public void ReadInterestRate(out DateTime[] dateArray,out decimal[] interestRateArray)
         {
-            foreach(var rate in lsRateModel)
+            var lsStrArray= ReadInterestRate();
+            dateArray = new DateTime[lsStrArray.Count];
+            interestRateArray = new decimal[lsStrArray.Count];
+            int i = 0;
+            foreach (var str in lsStrArray)
             {
-                dateArray.Add(rate.LoadTime);
-                interestRateArray.Add(rate.InterestRate);
+                interestRateArray[i] = decimal.Parse(str[0]);
+                dateArray[i] = DateTime.Parse(str[1]);
+                i++;
             }
         }
     }

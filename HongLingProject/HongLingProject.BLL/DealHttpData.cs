@@ -66,7 +66,7 @@ namespace HongLingProject.BLL
         /// <summary>
         /// 保存Http数据
         /// </summary>
-        public List<InterestRateModel> SaveHttpData()
+        public bool SaveHttpData()
         {
             var lsRate = GetHttpData();
             var dt= queryData.QueryLatestInterestRateTime();
@@ -75,8 +75,9 @@ namespace HongLingProject.BLL
             if (rate.Count != 0)
             {
                 insertData.BathInsertInterestRate(rate);
+                return true;
             }
-            return rate;
+            return false;
         }
 
         public List<InterestRateModel> GetHttpData()

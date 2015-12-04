@@ -31,8 +31,8 @@ namespace HongLingProject
     public partial class MainWindow : Window
     {
         private DispatcherTimer timer = new DispatcherTimer();
-        List<DateTime> dates=new List<DateTime>();
-        List<decimal> interestRate=new List<decimal>();
+        DateTime[] dates;
+        decimal[] interestRate;
         EnumerableDataSource<DateTime> datesDataSource;
         EnumerableDataSource<decimal> interestRateDataSource;
 
@@ -45,6 +45,7 @@ namespace HongLingProject
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            dealData.ReadInterestRate(out dates, out interestRate);
             datesDataSource = new EnumerableDataSource<DateTime>(dates);
             datesDataSource.SetXMapping(x => dateAxis.ConvertToDouble(x));
             interestRateDataSource = new EnumerableDataSource<decimal>(interestRate);
@@ -65,13 +66,14 @@ namespace HongLingProject
 
         private void GetHttpData(object sender, EventArgs e)
         {
-            var lsRateModel= dealHttpData.SaveHttpData();
-           
-            dealData.ReadInterestRate(ref dates,ref interestRate,lsRateModel);
-            AnimatedPlot();
+            if (dealHttpData.SaveHttpData())
+            {
+                AnimatedPlot();
+            }
         }
         private void AnimatedPlot()
         {
+            dealData.ReadInterestRate(out dates, out interestRate);
             datesDataSource.RaiseDataChanged();
             interestRateDataSource.RaiseDataChanged();
         }
