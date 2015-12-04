@@ -56,5 +56,15 @@ namespace HongLingProject.DAL
             string sql = @"SELECT InterestRate,LoadTime FROM dbo.InterestRate ORDER BY LoadTime ASC";
             return DBhelper.ExecuteDataTable(sql);
         }
+
+        /// <summary>
+        /// 查询最近一次利率的时间
+        /// </summary>
+        /// <returns></returns>
+        public DataTable QueryLatestInterestRateTime()
+        {
+            string sql = @"SELECT MAX(LoadTime) FROM dbo.InterestRate";
+            return DBhelper.ExecuteDataTable(sql);
+        }
     }
 }

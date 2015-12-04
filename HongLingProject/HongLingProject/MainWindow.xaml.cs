@@ -31,7 +31,10 @@ namespace HongLingProject
     public partial class MainWindow : Window
     {
         private DispatcherTimer timer = new DispatcherTimer();
-        private int i = 0;
+        List<DateTime> dates=new List<DateTime>();
+        List<decimal> interestRate=new List<decimal>();
+        EnumerableDataSource<DateTime> datesDataSource;
+        EnumerableDataSource<decimal> interestRateDataSource;
 
         DealData dealData = new DealData();
         DealHttpData dealHttpData = new DealHttpData();
@@ -42,36 +45,35 @@ namespace HongLingProject
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            timer.Interval = TimeSpan.FromSeconds(60);
-            //timer.Tick += new EventHandler(AnimatedPlot);
-            timer.Tick += new EventHandler(GetHttpData);
-            timer.IsEnabled = true;
-        }
-
-        private void GetHttpData(object sender, EventArgs e)
-        {
-            dealHttpData.SaveHttpData();
-            AnimatedPlot();
-        }
-        private void AnimatedPlot()
-        {
-            DateTime[] dates;
-            decimal[] interestRate;
-            dealData.ReadInterestRate(out dates, out interestRate);
-            var datesDataSource = new EnumerableDataSource<DateTime>(dates);
-
+            datesDataSource = new EnumerableDataSource<DateTime>(dates);
             datesDataSource.SetXMapping(x => dateAxis.ConvertToDouble(x));
-            var interestRateDataSource = new EnumerableDataSource<decimal>(interestRate);
-            interestRateDataSource.SetYMapping(y => interestAxis.ConvertToDouble((int)(y*100))/100);
+            interestRateDataSource = new EnumerableDataSource<decimal>(interestRate);
+            interestRateDataSource.SetYMapping(y => interestAxis.ConvertToDouble((int)(y * 100)) / 100);
 
-            var compositeDataSource = new   CompositeDataSource(datesDataSource, interestRateDataSource);
-
+            var compositeDataSource = new CompositeDataSource(datesDataSource, interestRateDataSource);
+            
             plotter.AddLineGraph(compositeDataSource,
                 new Pen(Brushes.Blue, 2),
                 new CirclePointMarker { Size = 10.0, Fill = Brushes.Red },
                 new PenDescription("Interest Rate"));
 
             plotter.Viewport.FitToView();
+            timer.Interval = TimeSpan.FromSeconds(6);
+            timer.Tick += new EventHandler(GetHttpData);
+            timer.IsEnabled = true;
+        }
+
+        private void GetHttpData(object sender, EventArgs e)
+        {
+            var lsRateModel= dealHttpData.SaveHttpData();
+           
+            dealData.ReadInterestRate(ref dates,ref interestRate,lsRateModel);
+            AnimatedPlot();
+        }
+        private void AnimatedPlot()
+        {
+            datesDataSource.RaiseDataChanged();
+            interestRateDataSource.RaiseDataChanged();
         }
 
         private void Insert_Button_Click(object sender, RoutedEventArgs e)

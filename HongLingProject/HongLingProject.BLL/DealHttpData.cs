@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HongLingProject.Helper;
 using HongLingProject.DAL;
+using System.Data;
 
 namespace HongLingProject.BLL
 {
@@ -47,6 +48,7 @@ namespace HongLingProject.BLL
         #endregion 私有全局变量
 
         InsertData insertData = new InsertData();
+        QueryData queryData = new QueryData();
         public DealHttpData()
         {
             MarkTypeDic = new Dictionary<string, string>();
@@ -64,10 +66,17 @@ namespace HongLingProject.BLL
         /// <summary>
         /// 保存Http数据
         /// </summary>
-        public void SaveHttpData()
+        public List<InterestRateModel> SaveHttpData()
         {
             var lsRate = GetHttpData();
-            insertData.BathInsertInterestRate(lsRate);
+            var dt= queryData.QueryLatestInterestRateTime();
+            DateTime datetime = DateTime.Parse(dt.Rows[0][0].ToString());
+            var rate = lsRate.Where(p => !DateTime.Equals(p.LoadTime, datetime)).ToList();
+            if (rate.Count != 0)
+            {
+                insertData.BathInsertInterestRate(rate);
+            }
+            return rate;
         }
 
         public List<InterestRateModel> GetHttpData()

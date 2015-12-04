@@ -39,7 +39,7 @@
         </Grid>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="80"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <d3:ChartPlotter Name="plotter" Grid.Row="1"  Grid.Column="1">
@@ -49,8 +49,8 @@
                 <d3:ChartPlotter.VerticalAxis>
                     <d3:VerticalIntegerAxis Name="interestAxis" />
                 </d3:ChartPlotter.VerticalAxis>
-                <d3:Header FontFamily="Arial" Content="Bug Information" />
-                <d3:VerticalAxisTitle FontFamily="Arial" Content="Count" />
+                <d3:Header FontFamily="Arial" Content="Hong Ling Mark History" />
+                <d3:VerticalAxisTitle FontFamily="Arial" Content="Interest Rate" />
                 <d3:HorizontalAxisTitle FontFamily="Arial" Content="Date" />
             </d3:ChartPlotter>
         </Grid>
