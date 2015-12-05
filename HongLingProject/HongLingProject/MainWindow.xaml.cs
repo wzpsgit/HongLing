@@ -43,6 +43,7 @@ namespace HongLingProject
             InitializeComponent();
         }
 
+        #region 利率曲线
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             dealData.ReadInterestRate(out dates, out interestRate);
@@ -56,6 +57,7 @@ namespace HongLingProject
             plotter.AddLineGraph(compositeDataSource,Colors.Green,1,"Interest Rate");
 
             plotter.Viewport.FitToView();
+            
             timer.Interval = TimeSpan.FromSeconds(6);
             timer.Tick += new EventHandler(GetHttpData);
             timer.IsEnabled = true;
@@ -75,12 +77,6 @@ namespace HongLingProject
             interestRateDataSource.RaiseDataChanged();
         }
 
-        private void Insert_Button_Click(object sender, RoutedEventArgs e)
-        {
-            int AutoBidNo = int.Parse(AutomaticBid_Text.Text);
-            MessageBox.Show(dealData.InsertAutoBid(AutoBidNo) ? "插入成功" : "插入失败");
-        }
-
         /// <summary>
         /// 利率的菜单点击
         /// </summary>
@@ -91,7 +87,9 @@ namespace HongLingProject
             InterestRateMenu.Visibility = Visibility.Visible;
             AutoBidMenu.Visibility = Visibility.Hidden;
         }
+        #endregion 利率曲线
 
+        #region 自动排名
         /// <summary>
         /// 自动排名菜单点击
         /// </summary>
@@ -102,5 +100,12 @@ namespace HongLingProject
             InterestRateMenu.Visibility = Visibility.Hidden;
             AutoBidMenu.Visibility = Visibility.Visible;
         }
+
+        private void Insert_Button_Click(object sender, RoutedEventArgs e)
+        {
+            int AutoBidNo = int.Parse(AutomaticBid_Text.Text);
+            MessageBox.Show(dealData.InsertAutoBid(AutoBidNo) ? "插入成功" : "插入失败");
+        }
+        #endregion 自动排名
     }
 }
